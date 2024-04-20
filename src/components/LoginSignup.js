@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { host } from '../hosts';
 
 // Define the Alert component for easier use with the Snackbar
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -22,7 +23,7 @@ function LoginSignup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = isLoginView ? 'http://localhost:8000/v1/userService/login' : 'http://localhost:8000/v1/userService/signup';
+    const url = isLoginView ? host + '/userService/login' : host + '/userService/signup';
     const userData = {
       userDetails: {
         username,

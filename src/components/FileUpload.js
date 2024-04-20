@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tabs, Tab, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton } from '@mui/material';
 import { CloudDownload, Delete } from '@mui/icons-material';
+import { host } from '../hosts';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,7 +45,7 @@ const FileUpload = () => {
             return;
         }
         try {
-            const response = await axios.get('http://localhost:8000/v1/fileService/getFiles', {
+            const response = await axios.get(host + '/fileService/getFiles', {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 },
@@ -68,7 +69,7 @@ const FileUpload = () => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:8000/v1/fileService/downloadFile/${filename}`, {
+            const response = await axios.get(host + `/fileService/downloadFile/${filename}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 },
@@ -104,7 +105,7 @@ const FileUpload = () => {
         const formData = new FormData();
         formData.append('file', selectedFile);
         try {
-            const response = await axios.post('http://localhost:8000/v1/fileService/uploadFile', formData, {
+            const response = await axios.post(host + '/fileService/uploadFile', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${accessToken}`
@@ -124,7 +125,7 @@ const FileUpload = () => {
             return;
         }
         try {
-            await axios.delete(`http://localhost:8000/v1/fileService/removeFile/${filename}`, {
+            await axios.delete(host + `/fileService/removeFile/${filename}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 },

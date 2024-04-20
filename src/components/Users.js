@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, IconButton, Snackbar, Alert } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import { host } from '../hosts';
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -23,7 +24,7 @@ const Users = () => {
                 console.error('Access token not found');
                 return;
             }
-            const response = await axios.get('http://localhost:8000/v1/userService/getUsers', {
+            const response = await axios.get(host + '/userService/getUsers', {
                 headers: { Authorization: `Bearer ${accessToken}` }
             });
             setUsers(response.data.data);
@@ -52,7 +53,7 @@ const Users = () => {
                 console.error('Access token not found');
                 return;
             }
-            await axios.put('http://localhost:8000/v1/userService/updateUser', {
+            await axios.put(host + '/userService/updateUser', {
                 userDetails: editFormData
             }, {
                 headers: { Authorization: `Bearer ${accessToken}` }
