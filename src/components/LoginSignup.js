@@ -6,10 +6,7 @@ import MuiAlert from '@mui/material/Alert';
 
 import { host } from '../hosts';
 
-// Define the Alert component for easier use with the Snackbar
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+
 
 function LoginSignup() {
   const [isLoginView, setIsLoginView] = useState(true);

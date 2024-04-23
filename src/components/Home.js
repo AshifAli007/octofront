@@ -69,7 +69,7 @@ const Home = () => {
                     <strong>Hashed Sharding</strong> involves computing a hash of the shard key field’s value. Each chunk is then assigned a range based on the hashed shard key values.
                 </p>
                 <p>
-                    <img src={img1} />
+                    <img alt="Shard keys" src={img1} />
                 </p>
                 <p>
                     While a range of shard keys may be “close”, their hashed values are unlikely to be on the same chunk.
