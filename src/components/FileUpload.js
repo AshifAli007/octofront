@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Tabs, Tab, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton } from '@mui/material';
+import { Tabs, Tab, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import { CloudDownload, Delete } from '@mui/icons-material';
 import { host } from '../hosts';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
+
 
     return (
         <div
@@ -24,14 +25,21 @@ function TabPanel(props) {
     );
 }
 
+
 const FileUpload = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileDetails, setFileDetails] = useState({});
     const [files, setFiles] = useState([]);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('info');
 
     const handleTabChange = (event, newValue) => {
         setSelectedTab(newValue);
+    };
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
 
     useEffect(() => {
@@ -113,6 +121,9 @@ const FileUpload = () => {
             });
             // Assuming the response contains file details
             setFileDetails(response.data.data.data);
+            setSnackbarMessage('File uploaded successfully');
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
 
         } catch (error) {
             console.error('Error uploading file:', error);
@@ -199,6 +210,11 @@ const FileUpload = () => {
                     </Table>
                 </TableContainer>
             </TabPanel>
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 };
