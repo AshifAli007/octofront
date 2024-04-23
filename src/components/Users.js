@@ -89,6 +89,8 @@ const Users = () => {
     return (
         <div>
             <h1>Userbase</h1>
+            <p style={{ color: "blue" }}>To update any user just click on edit button under action and update the value and click on save button.</p>
+
             <TableContainer component={Paper}>
                 <Table aria-label="editable user table">
                     <TableHead>

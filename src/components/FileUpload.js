@@ -184,6 +184,7 @@ const FileUpload = () => {
                 </Tabs>
             </Box>
             <TabPanel value={selectedTab} index={0}>
+                <p style={{ color: "blue" }}>To upload: Choose a file from your local folder and click upload then click on view files to check the status</p>
                 <h1>Upload Files Here</h1>
                 <input type="file" onChange={handleFileSelect} />
                 <button onClick={handleUpload}>Upload</button>
@@ -197,6 +198,7 @@ const FileUpload = () => {
                 )}
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
+                <p style={{ color: "blue" }}>To retrive any file from server click on cloud icon, to delete a file use delete icon.</p>
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>
