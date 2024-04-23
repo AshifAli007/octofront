@@ -1,5 +1,5 @@
 // import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';  
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginSignup from './components/LoginSignup';
 import 'react-notifications-component/dist/theme.css'
 import Home from './components/Home';
@@ -13,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<LoginSignup />} />
+        <Route exact path="/" element={<MainLayout><LoginSignup /></MainLayout>} />
         <Route exact path="/home" element={<MainLayout><Home /></MainLayout>} />
         <Route exact path="/settings" element={<MainLayout><Settings /></MainLayout>} />
         <Route exact path="/fileupload" element={<MainLayout><FileUpload /></MainLayout>} />

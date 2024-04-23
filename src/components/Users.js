@@ -22,6 +22,9 @@ const Users = () => {
             const accessToken = localStorage.getItem('accessToken');
             if (!accessToken) {
                 console.error('Access token not found');
+                setSnackbarMessage('Error fetching users, Login first to view users');
+                setSnackbarSeverity('error');
+                setOpenSnackbar(true);
                 return;
             }
             const response = await axios.get(host + '/userService/getUsers', {
@@ -30,6 +33,7 @@ const Users = () => {
             setUsers(response.data.data);
         } catch (error) {
             console.error('Error fetching users:', error);
+
         }
     };
 

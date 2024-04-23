@@ -50,6 +50,9 @@ const FileUpload = () => {
         const accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
             console.error('Access token not found');
+            setSnackbarMessage('Error fetching files, Login first to view files');
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
             return;
         }
         try {
@@ -61,6 +64,7 @@ const FileUpload = () => {
             setFiles(response.data.data);
         } catch (error) {
             console.error('Error fetching files:', error);
+
         }
     };
 
@@ -73,10 +77,16 @@ const FileUpload = () => {
         const accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
             console.error('Access token not found');
+            setSnackbarMessage('Access token not found, Login first to view users');
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
             return;
         }
 
         try {
+            setSnackbarMessage('File retrival started...');
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
             const response = await axios.get(host + `/fileService/downloadFile/${filename}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -98,8 +108,15 @@ const FileUpload = () => {
             // Clean up by revoking the Blob URL and removing the temporary link
             window.URL.revokeObjectURL(fileURL);
             fileLink.remove();
+
+            setSnackbarMessage('File retrival complete');
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
         } catch (error) {
             console.error('Error downloading file:', error);
+            setSnackbarMessage('File retrival incomplete');
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
         }
     };
 
@@ -108,11 +125,17 @@ const FileUpload = () => {
         const accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
             console.error('Access token not found');
+            setSnackbarMessage('Access token not found, Login first to view users');
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
             return;
         }
         const formData = new FormData();
         formData.append('file', selectedFile);
         try {
+            setSnackbarMessage('File upload initiated...');
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
             const response = await axios.post(host + '/fileService/uploadFile', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -127,6 +150,9 @@ const FileUpload = () => {
 
         } catch (error) {
             console.error('Error uploading file:', error);
+            setSnackbarMessage('File uploaded error');
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
         }
     };
 

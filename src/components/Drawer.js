@@ -95,7 +95,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({children}) {
+export default function MiniDrawer({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -113,7 +113,12 @@ export default function MiniDrawer({children}) {
   };
 
   const handleMenuItemClick = (path) => {
-    navigate('/'+path);
+    if (path === 'logout') {
+      localStorage.clear();
+      navigate('/');
+      return;
+    }
+    navigate('/' + path);
   }
 
   return (
@@ -147,16 +152,16 @@ export default function MiniDrawer({children}) {
         <Divider />
         <List>
           {['Home', 'Users', 'File Upload'].map((text, index) => (
-                  
 
-            <ListItem 
-                onClick={() => handleMenuItemClick(text.toLowerCase().replace(" ", ""))} 
-                key={text} 
-                disablePadding 
-                sx={{ 
-                    display: 'block',
-                    backgroundColor: currentPath === '/'+text.toLowerCase().replace(" ", "") ? 'rgba(0, 0, 0, 0.1)' : 'inherit'
-                }}>
+
+            <ListItem
+              onClick={() => handleMenuItemClick(text.toLowerCase().replace(" ", ""))}
+              key={text}
+              disablePadding
+              sx={{
+                display: 'block',
+                backgroundColor: currentPath === '/' + text.toLowerCase().replace(" ", "") ? 'rgba(0, 0, 0, 0.1)' : 'inherit'
+              }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -171,10 +176,10 @@ export default function MiniDrawer({children}) {
                     justifyContent: 'center',
                   }}
                 >
-                    {index === 0 && <HomeRoundedIcon />}
-                    {index === 1 && <ManageAccountsRoundedIcon />}
-                    {index === 2 && <CloudUploadRoundedIcon />}
-                   
+                  {index === 0 && <HomeRoundedIcon />}
+                  {index === 1 && <ManageAccountsRoundedIcon />}
+                  {index === 2 && <CloudUploadRoundedIcon />}
+
 
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
@@ -184,14 +189,14 @@ export default function MiniDrawer({children}) {
         </List>
         <Divider />
         <List>
-          {['Settings', 'Logout'].map((text, index) => (
+          {['Logout'].map((text, index) => (
             <ListItem onClick={() => handleMenuItemClick(text.toLowerCase().replace(" ", ""))} key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
-                  backgroundColor: currentPath === '/'+text.toLowerCase().replace(" ", "") ? 'rgba(0, 0, 0, 0.1)' : 'inherit'
+                  backgroundColor: currentPath === '/' + text.toLowerCase().replace(" ", "") ? 'rgba(0, 0, 0, 0.1)' : 'inherit'
                 }}
               >
                 <ListItemIcon
@@ -201,8 +206,8 @@ export default function MiniDrawer({children}) {
                     justifyContent: 'center',
                   }}
                 >
-                  {index === 0 && <SettingsApplicationsRoundedIcon />}
-                  {index === 1 && <LogoutRoundedIcon />}
+                  {index === 1 && <SettingsApplicationsRoundedIcon />}
+                  {index === 0 && <LogoutRoundedIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
