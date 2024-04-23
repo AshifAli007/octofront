@@ -36,7 +36,7 @@ const FileUpload = () => {
 
     useEffect(() => {
         fetchFiles();
-    }, []);
+    }, [fileDetails]);
 
     const fetchFiles = async () => {
         const accessToken = localStorage.getItem('accessToken');
@@ -113,6 +113,7 @@ const FileUpload = () => {
             });
             // Assuming the response contains file details
             setFileDetails(response.data.data.data);
+
         } catch (error) {
             console.error('Error uploading file:', error);
         }
