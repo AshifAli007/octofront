@@ -8,6 +8,8 @@ const Home = () => {
                 </h1>
             </header>
             <main>
+                <p>Link to GitHub Repo: https://github.com/cop5611-S24/octopusplus</p>
+
                 <section>
                     <p>
                         Our platform provides a robust solution for managing files securely and efficiently. Leveraging cutting-edge technologies like React, Node.js, Axios, and Material-UI (MUI), we offer a dynamic user experience for uploading and retrieving files with ease. Our backend is powered by Node.js and communicates with MongoDB Atlas, ensuring high availability and scalability.
